@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishGuard AI Report</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 22mm 18mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #efefef;
+      color: #111;
+      font-family: "Times New Roman", Times, serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      background: #fff;
+      padding: 22mm 18mm;
+      box-shadow: 0 3px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .page-break {
+      page-break-after: always;
+    }
+
+    .title-page {
+      min-height: 250mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 22px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 20px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #222;
+    }
+
+    h3 {
+      font-size: 17px;
+      margin-top: 16px;
+    }
+
+    h4 {
+      font-size: 15px;
+      margin-top: 12px;
+    }
+
+    p {
+      margin: 10px 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 10px 0 10px 22px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 18px;
+      font-size: 15px;
+    }
+
+    th, td {
+      border: 1px solid #222;
+      padding: 8px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #ececec;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .spacer {
+      height: 24px;
+    }
+
+    .mono {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+      background: #f6f6f6;
+      border: 1px solid #ccc;
+      padding: 12px;
+      white-space: pre-wrap;
+    }
+
+    .inline-code {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+    }
+
+    .plot {
+      width: 100%;
+      display: block;
+      margin: 8px 0 18px;
+      border: 1px solid #bbb;
+    }
+
+    .placeholder {
+      border: 1px dashed #666;
+      background: #fbfbfb;
+      padding: 14px;
+      margin: 12px 0;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: auto;
+        min-height: auto;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="page page-break">
+    <div class="title-page">
+      <h1>VIVEKANAND EDUCATION SOCIETY'S INSTITUTE OF TECHNOLOGY</h1>
+      <h3>Department of Computer Engineering</h3>
+
+      <div class="spacer"></div>
+
+      <h3>CA / Mini Project Report</h3>
+
+      <div class="spacer"></div>
+
+      <p class="center"><strong>Project Title</strong></p>
+      <p class="center"><strong>PhishGuard AI: URL Phishing Detection Using Machine Learning, Genetic Algorithm, and QR Scanning</strong></p>
+
+      <div class="spacer"></div>
+
+      <table>
+        <tr>
+          <td><strong>Under the subject</strong></td>
+          <td>Artificial Intelligence Mini Project</td>
+        </tr>
+        <tr>
+          <td><strong>Year / Semester</strong></td>
+          <td>S.E. / IV</td>
+        </tr>
+        <tr>
+          <td><strong>Submitted by</strong></td>
+          <td>
+            [Student Name 1 - Roll No.]<br>
+            [Student Name 2 - Roll No.]<br>
+            [Student Name 3 - Roll No.]<br>
+            [Student Name 4 - Roll No.]
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Under the guidance of</strong></td>
+          <td>[Guide Name]</td>
+        </tr>
+        <tr>
+          <td><strong>Subject Teacher</strong></td>
+          <td>[Subject Teacher Name]</td>
+        </tr>
+        <tr>
+          <td><strong>Academic Year</strong></td>
+          <td>2025-2026</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="page page-break">
+    <h2 class="center">Index</h2>
+    <ol>
+      <li>Title</li>
+      <li>Chapter 1: Introduction</li>
+      <li>Chapter 2: Literature Survey</li>
+      <li>Chapter 3: Requirements</li>
+      <li>Chapter 4: Proposed Design (Block Diagram)</li>
+      <li>Chapter 5: Implementation</li>
+      <li>Chapter 6: Result Analysis</li>
+      <li>Chapter 7: Conclusion</li>
+      <li>References</li>
+    </ol>
+  </section>
+
+  <section class="page">
+    <h2>Chapter 1: Introduction</h2>
+
+    <h3>1.1 Background</h3>
+    <p>Phishing is a cyberattack in which an attacker tries to trick a user into opening a fake link or revealing sensitive information such as passwords, OTPs, or banking details. Since URLs are the first visible indicator of many phishing attacks, automatic URL analysis is a practical way to detect threats quickly.</p>
+    <p>This project, <strong>PhishGuard AI</strong>, is a local phishing URL detection system built using Python and Machine Learning. It extracts numerical features directly from a URL string, applies Genetic Algorithm based feature selection, and classifies the URL using a voting ensemble of Random Forest, XGBoost, and LightGBM. The system also supports QR code scanning so that suspicious URLs hidden inside QR codes can be analyzed.</p>
+
+    <h3>1.2 Problem Statement</h3>
+    <p>Manual inspection of URLs is difficult for normal users, especially when attackers use typo-squatting, suspicious top-level domains, URL shorteners, encoded strings, excessive subdomains, or QR-code based phishing. The goal of this project is to build a fast and practical system that can classify URLs as legitimate or phishing using only locally extracted URL-based features.</p>
+
+    <h3>1.3 Objectives</h3>
+    <ul>
+      <li>To detect phishing URLs using machine learning.</li>
+      <li>To extract discriminative lexical, structural, and statistical features from URLs.</li>
+      <li>To reduce irrelevant features using a Genetic Algorithm.</li>
+      <li>To improve prediction accuracy using a soft voting ensemble.</li>
+      <li>To provide a simple web-based interface for end users.</li>
+      <li>To support QR-code based URL extraction for detecting quishing attacks.</li>
+    </ul>
+
+    <h3>1.4 Scope</h3>
+    <p>The system focuses on URL-based phishing detection and does not rely on external APIs, DNS lookups, or webpage downloads. This keeps the solution lightweight and fast. The current implementation works on a locally prepared dataset of labeled legitimate and phishing URLs and can be extended further with live threat intelligence in future versions.</p>
+
+    <h3>1.5 Project Summary</h3>
+    <ul>
+      <li>33 handcrafted URL features.</li>
+      <li>A custom Genetic Algorithm for feature selection.</li>
+      <li>A voting ensemble using Random Forest, XGBoost, and LightGBM.</li>
+      <li>A Flask web application for prediction.</li>
+      <li>QR image scanning using OpenCV.</li>
+      <li>Evaluation plots such as confusion matrix, ROC curve, GA evolution, and feature importance.</li>
+    </ul>
+
+    <h2>Chapter 2: Literature Survey</h2>
+    <p>The project design is aligned with recent work in phishing URL detection, feature selection, ensemble learning, and QR-code decoding.</p>
+
+    <table>
+      <tr>
+        <th>Ref.</th>
+        <th>Work / Source</th>
+        <th>Key Idea</th>
+        <th>Relevance to This Project</th>
+      </tr>
+      <tr>
+        <td>[1]</td>
+        <td>Kocyigit et al. (2024)</td>
+        <td>Genetic Algorithm based feature selection helps reduce unnecessary URL features while improving model quality and efficiency.</td>
+        <td>Supports the use of GA for selecting the most informative phishing features.</td>
+      </tr>
+      <tr>
+        <td>[2]</td>
+        <td>MDPI Electronics (2022)</td>
+        <td>GA-embedded phishing detection shows that evolutionary search is effective for optimizing feature subsets in URL-based detection systems.</td>
+        <td>Motivates the custom GA used in this system.</td>
+      </tr>
+      <tr>
+        <td>[3]</td>
+        <td>Shin et al. (2022)</td>
+        <td>Heterogeneous ensemble models outperform single models for malicious webpage detection.</td>
+        <td>Supports using a voting ensemble instead of a single classifier.</td>
+      </tr>
+      <tr>
+        <td>[4]</td>
+        <td>scikit-learn RandomForestClassifier documentation</td>
+        <td>Random forests combine many decision trees to improve predictive accuracy and reduce overfitting.</td>
+        <td>Used as one of the base learners in the ensemble.</td>
+      </tr>
+      <tr>
+        <td>[5]</td>
+        <td>XGBoost Python API documentation</td>
+        <td>XGBClassifier provides gradient-boosted decision trees suitable for high-performance classification.</td>
+        <td>Used as the second ensemble member.</td>
+      </tr>
+      <tr>
+        <td>[6]</td>
+        <td>LightGBM LGBMClassifier documentation</td>
+        <td>LightGBM provides efficient gradient boosting on tabular data.</td>
+        <td>Used as the third ensemble member.</td>
+      </tr>
+      <tr>
+        <td>[7]</td>
+        <td>Flask Quickstart documentation</td>
+        <td>Flask provides simple routing and request handling for web applications.</td>
+        <td>Used to expose prediction and QR scan APIs.</td>
+      </tr>
+      <tr>
+        <td>[8]</td>
+        <td>OpenCV QRCodeDetector documentation</td>
+        <td><span class="inline-code">detectAndDecode()</span> supports direct QR-code detection and decoding from an input image.</td>
+        <td>Used for extracting URLs from uploaded QR images.</td>
+      </tr>
+    </table>
+
+    <h3>2.1 Observations from Literature</h3>
+    <ul>
+      <li>URL-based phishing detection remains effective because many phishing attacks reveal suspicious lexical and structural patterns.</li>
+      <li>Feature selection is important when many handcrafted URL features are used, because redundant features can increase training cost and reduce generalization.</li>
+      <li>Ensemble learning improves robustness because different classifiers capture different aspects of the data.</li>
+      <li>QR-based phishing, also called quishing, requires image-based preprocessing before URL classification.</li>
+    </ul>
+
+    <h3>2.2 Motivation for the Proposed System</h3>
+    <p>Based on the above findings, this project combines URL feature engineering, Genetic Algorithm based feature selection, voting ensemble classification, and QR-code scanning into one practical phishing detection pipeline.</p>
+
+    <h2>Chapter 3: Requirements</h2>
+
+    <h3>3.1 Functional Requirements</h3>
+    <ul>
+      <li>The system shall accept a URL entered by the user.</li>
+      <li>The system shall extract 33 numerical features from the URL.</li>
+      <li>The system shall classify the URL as legitimate or phishing.</li>
+      <li>The system shall display confidence score, risk level, and risk factors.</li>
+      <li>The system shall allow QR image upload and decode the embedded URL.</li>
+      <li>The system shall provide model information and plots through the web app.</li>
+    </ul>
+
+    <h3>3.2 Non-Functional Requirements</h3>
+    <ul>
+      <li>The system should run locally without external APIs.</li>
+      <li>The interface should be simple and easy to use.</li>
+      <li>The prediction process should be fast enough for near real-time use.</li>
+      <li>The code should be modular so that the training and web layers remain separate.</li>
+      <li>The model should be reproducible using a fixed random seed.</li>
+    </ul>
+
+    <h3>3.3 Software Requirements</h3>
+    <table>
+      <tr><th>Component</th><th>Requirement</th></tr>
+      <tr><td>Operating System</td><td>Windows / Linux / any Python-supported desktop OS</td></tr>
+      <tr><td>Programming Language</td><td>Python 3.x</td></tr>
+      <tr><td>Web Framework</td><td>Flask 3.0.0</td></tr>
+      <tr><td>Data Processing</td><td>Pandas 2.1.4, NumPy 1.26.2</td></tr>
+      <tr><td>Machine Learning</td><td>scikit-learn 1.3.2</td></tr>
+      <tr><td>Boosting Libraries</td><td>XGBoost 2.0.3, LightGBM 4.1.0</td></tr>
+      <tr><td>Visualization</td><td>Matplotlib 3.8.2, Seaborn 0.13.0</td></tr>
+      <tr><td>Model Persistence</td><td>joblib 1.3.2</td></tr>
+      <tr><td>Computer Vision</td><td>opencv-python-headless 4.9.0.80</td></tr>
+    </table>
+
+    <h3>3.4 Suggested Hardware Requirements</h3>
+    <table>
+      <tr><th>Component</th><th>Suggested Specification</th></tr>
+      <tr><td>Processor</td><td>Any modern dual-core or better CPU</td></tr>
+      <tr><td>RAM</td><td>4 GB minimum, 8 GB recommended</td></tr>
+      <tr><td>Storage</td><td>Around 1 GB free space for code, model, plots, and dataset</td></tr>
+      <tr><td>Internet</td><td>Not required for prediction after setup</td></tr>
+    </table>
+
+    <h3>3.5 Dataset Requirements</h3>
+    <p>The project uses a locally prepared labeled dataset stored in <span class="inline-code">data/raw/urls.csv</span> and <span class="inline-code">data/processed/features.csv</span>.</p>
+    <ul>
+      <li>Total samples: <strong>750</strong></li>
+      <li>Legitimate URLs: <strong>375</strong></li>
+      <li>Phishing URLs: <strong>375</strong></li>
+      <li>Total engineered features: <strong>33</strong></li>
+    </ul>
+
+    <h2>Chapter 4: Proposed Design (Block Diagram)</h2>
+
+    <h3>4.1 System Overview</h3>
+    <p>The proposed system has two user entry points: URL text input and QR image upload. If a QR image is uploaded, the system first extracts the hidden URL using OpenCV. The URL is then passed to the same feature extraction and classification pipeline used for normal text input.</p>
+
+    <h3>4.2 Block Diagram</h3>
+    <div class="mono">                    +----------------------+
+                    |      User Input      |
+                    |  URL or QR Image     |
+                    +----------+-----------+
+                               |
+                +--------------+--------------+
+                |                             |
+                v                             v
+      +-------------------+         +-------------------+
+      | URL Text Input    |         | QR Image Upload   |
+      +-------------------+         +---------+---------+
+                                              |
+                                              v
+                                   +---------------------+
+                                   | OpenCV QR Decoder   |
+                                   | detectAndDecode()   |
+                                   +----------+----------+
+                                              |
+                                              v
+                                   +---------------------+
+                                   | Extracted URL Text  |
+                                   +----------+----------+
+                                              |
+                                              v
+                                   +---------------------+
+                                   | Feature Extraction  |
+                                   | 33 URL Features     |
+                                   +----------+----------+
+                                              |
+                                              v
+                                   +---------------------+
+                                   | GA Selected 18      |
+                                   | Important Features  |
+                                   +----------+----------+
+                                              |
+                                              v
+                                   +---------------------+
+                                   | StandardScaler      |
+                                   +----------+----------+
+                                              |
+                                              v
+                                   +---------------------+
+                                   | Voting Ensemble     |
+                                   | RF + XGB + LGBM     |
+                                   +----------+----------+
+                                              |
+                                              v
+                                   +---------------------+
+                                   | Prediction Result   |
+                                   | Risk Level + Factors|
+                                   +---------------------+</div>
+
+    <h3>4.3 GA Configuration Used</h3>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Population Size</td><td>40</td></tr>
+      <tr><td>Maximum Generations</td><td>30</td></tr>
+      <tr><td>Crossover Rate</td><td>0.8</td></tr>
+      <tr><td>Mutation Rate</td><td>0.03</td></tr>
+      <tr><td>Tournament Size</td><td>5</td></tr>
+      <tr><td>Elitism Count</td><td>2</td></tr>
+      <tr><td>Minimum Features</td><td>5</td></tr>
+      <tr><td>CV Folds</td><td>5</td></tr>
+      <tr><td>Early Stop Patience</td><td>10</td></tr>
+      <tr><td>Random Seed</td><td>42</td></tr>
+    </table>
+
+    <h3>4.4 Feature Selection Outcome</h3>
+    <p>The GA selected <strong>18 out of 33</strong> engineered features:</p>
+    <ul>
+      <li><span class="inline-code">num_dots</span></li>
+      <li><span class="inline-code">num_hyphens</span></li>
+      <li><span class="inline-code">num_underscores</span></li>
+      <li><span class="inline-code">num_slashes</span></li>
+      <li><span class="inline-code">digit_ratio</span></li>
+      <li><span class="inline-code">has_https</span></li>
+      <li><span class="inline-code">suspicious_tld</span></li>
+      <li><span class="inline-code">has_phishing_keywords</span></li>
+      <li><span class="inline-code">has_brand_name</span></li>
+      <li><span class="inline-code">shannon_entropy</span></li>
+      <li><span class="inline-code">vowel_ratio</span></li>
+      <li><span class="inline-code">longest_word_length</span></li>
+      <li><span class="inline-code">avg_word_length</span></li>
+      <li><span class="inline-code">has_redirect</span></li>
+      <li><span class="inline-code">has_anchor</span></li>
+      <li><span class="inline-code">query_param_count</span></li>
+      <li><span class="inline-code">tld_in_path</span></li>
+      <li><span class="inline-code">url_similarity_score</span></li>
+    </ul>
+
+    <h2>Chapter 5: Implementation</h2>
+
+    <h3>5.1 Dataset Preparation</h3>
+    <p>The dataset preparation logic is implemented in <span class="inline-code">data/download_datasets.py</span>. The script stores curated legitimate URLs, stores curated phishing URLs, generates additional synthetic variations, balances both classes, saves labeled URLs to <span class="inline-code">data/raw/urls.csv</span>, and extracts URL features to <span class="inline-code">data/processed/features.csv</span>.</p>
+
+    <h3>5.2 Feature Engineering</h3>
+    <p>Feature extraction is implemented in <span class="inline-code">src/feature_engineering.py</span>. The system computes 33 features grouped into lexical features, structural features, suspicion indicators, statistical features, and brand similarity features. This design allows the system to work offline without fetching webpage content.</p>
+
+    <h3>5.3 Genetic Algorithm Module</h3>
+    <p>The custom GA is implemented in <span class="inline-code">src/genetic_algorithm.py</span>. Each chromosome is a binary mask over the 33 features, where <span class="inline-code">1</span> means the feature is selected and <span class="inline-code">0</span> means the feature is dropped. The fitness value is the mean cross-validated F1-score of a Random Forest classifier. The algorithm uses random initialization, tournament selection, single-point crossover, bit-flip mutation, elitism, and early stopping.</p>
+    <ul>
+      <li>Best GA fitness: <strong>1.0000</strong></li>
+      <li>Total GA time: <strong>318.7 seconds</strong></li>
+      <li>Generations completed before early stopping: <strong>11</strong></li>
+    </ul>
+
+    <h3>5.4 Model Training</h3>
+    <p>The training pipeline is implemented in <span class="inline-code">src/train.py</span>. It loads processed features, performs an 80:20 stratified split, runs the Genetic Algorithm on the training set, keeps only GA-approved features, scales them, trains a soft voting ensemble, evaluates the model, and saves the trained model to <span class="inline-code">models/model.pkl</span>.</p>
+
+    <h3>5.5 Prediction Module</h3>
+    <p>Prediction logic is implemented in <span class="inline-code">src/predict.py</span>. For each input URL, the module performs pre-validation, extracts features, selects GA-approved features, scales the vector, predicts phishing probability, maps the score to a risk level, and generates human-readable risk factors.</p>
+
+    <h3>5.6 QR Scanner Module</h3>
+    <p>QR scanning is implemented in <span class="inline-code">src/qr_scanner.py</span> using OpenCV. The uploaded image bytes are converted into a NumPy array, decoded into an image matrix, and then passed to <span class="inline-code">cv2.QRCodeDetector().detectAndDecode()</span> to extract the URL.</p>
+
+    <h3>5.7 Web Application</h3>
+    <p>The Flask server is implemented in <span class="inline-code">app/app.py</span> and provides endpoints for the main interface, URL classification, QR-image scanning, model metadata, and plot serving.</p>
+
+    <h3>5.8 Major Files in the Project</h3>
+    <table>
+      <tr><th>File</th><th>Purpose</th></tr>
+      <tr><td><span class="inline-code">data/download_datasets.py</span></td><td>Dataset creation and feature CSV generation</td></tr>
+      <tr><td><span class="inline-code">src/feature_engineering.py</span></td><td>Extracts 33 URL features</td></tr>
+      <tr><td><span class="inline-code">src/genetic_algorithm.py</span></td><td>Custom feature-selection GA</td></tr>
+      <tr><td><span class="inline-code">src/train.py</span></td><td>Full training and evaluation pipeline</td></tr>
+      <tr><td><span class="inline-code">src/predict.py</span></td><td>Single URL inference logic</td></tr>
+      <tr><td><span class="inline-code">src/qr_scanner.py</span></td><td>QR URL extraction</td></tr>
+      <tr><td><span class="inline-code">app/app.py</span></td><td>Flask backend</td></tr>
+      <tr><td><span class="inline-code">app/templates/index.html</span></td><td>Web interface markup</td></tr>
+      <tr><td><span class="inline-code">app/static/style.css</span></td><td>UI styling</td></tr>
+      <tr><td><span class="inline-code">app/static/script.js</span></td><td>Frontend interactions</td></tr>
+    </table>
+
+    <h2>Chapter 6: Result Analysis</h2>
+
+    <h3>6.1 Experimental Setup</h3>
+    <ul>
+      <li>Total dataset size: <strong>750</strong></li>
+      <li>Train set size: <strong>600</strong></li>
+      <li>Test set size: <strong>150</strong></li>
+      <li>Split strategy: <strong>80:20 stratified split</strong></li>
+      <li>Random state: <strong>42</strong></li>
+    </ul>
+
+    <h3>6.2 Evaluation Metrics</h3>
+    <table>
+      <tr><th>Metric</th><th>Value</th></tr>
+      <tr><td>Accuracy</td><td>1.0000</td></tr>
+      <tr><td>Precision</td><td>1.0000</td></tr>
+      <tr><td>Recall</td><td>1.0000</td></tr>
+      <tr><td>F1-Score</td><td>1.0000</td></tr>
+      <tr><td>ROC-AUC</td><td>1.0000</td></tr>
+    </table>
+
+    <h3>6.3 Confusion Matrix</h3>
+    <table>
+      <tr><th>Actual / Predicted</th><th>Legitimate</th><th>Phishing</th></tr>
+      <tr><td>Legitimate</td><td>75</td><td>0</td></tr>
+      <tr><td>Phishing</td><td>0</td><td>75</td></tr>
+    </table>
+    <p>This means the saved model correctly classified all 150 test samples in the available evaluation split.</p>
+
+    <h3>6.4 Example Prediction Behavior</h3>
+    <table>
+      <tr><th>Test URL</th><th>Predicted Class</th><th>Risk Level</th><th>Phishing Probability</th></tr>
+      <tr><td><span class="inline-code">https://www.google.com</span></td><td>Legitimate</td><td>Safe</td><td>0.04%</td></tr>
+      <tr><td><span class="inline-code">http://paypal-secure-login.tk/verify</span></td><td>Phishing</td><td>Dangerous</td><td>99.98%</td></tr>
+      <tr><td><span class="inline-code">http://www.google.com@evil.com/login</span></td><td>Phishing</td><td>Dangerous</td><td>93.57%</td></tr>
+    </table>
+    <p>Example risk factors generated by the model include suspicious TLDs, phishing keywords, missing HTTPS, use of the <span class="inline-code">@</span> symbol, redirect patterns, and similarity to known brand domains.</p>
+
+    <h3>6.5 Generated Evaluation Plots</h3>
+    <h4>Confusion Matrix</h4>
+    <img class="plot" src="plots/confusion_matrix.png" alt="Confusion Matrix">
+
+    <h4>ROC Curve</h4>
+    <img class="plot" src="plots/roc_curve.png" alt="ROC Curve">
+
+    <h4>Feature Importance</h4>
+    <img class="plot" src="plots/feature_importance.png" alt="Feature Importance">
+
+    <h4>GA Evolution</h4>
+    <img class="plot" src="plots/ga_evolution.png" alt="GA Evolution">
+
+    <h3>6.6 Interpretation</h3>
+    <ul>
+      <li>The project achieved perfect performance on the available held-out split.</li>
+      <li>The GA reduced the feature set from 33 to 18 features, which simplifies inference.</li>
+      <li>Ensemble classification improved robustness by combining different tree-based learners.</li>
+      <li>The plots generated in the repository support the saved evaluation metrics.</li>
+    </ul>
+
+    <h3>6.7 Screenshots / Photos of Project</h3>
+    <div class="placeholder">
+      Add screenshots here if your faculty wants actual photos of the running system:
+      <ul>
+        <li>Home page of the web application</li>
+        <li>URL scan result page</li>
+        <li>QR scan input and output page</li>
+        <li>Model information dashboard view</li>
+      </ul>
+    </div>
+
+    <h2>Chapter 7: Conclusion</h2>
+    <p>PhishGuard AI is a practical phishing URL detection system that combines feature engineering, Genetic Algorithm based feature selection, ensemble learning, and a web interface into one complete workflow. The project successfully demonstrates how lexical and structural URL analysis can be used to detect phishing attempts without depending on external services.</p>
+    <p>The saved model metadata shows excellent results on the current evaluation split, with accuracy, precision, recall, F1-score, and ROC-AUC all equal to 1.0000. In addition, the QR scanning module extends the system beyond plain text URLs and makes it relevant for modern quishing threats.</p>
+
+    <h3>7.1 Limitations</h3>
+    <ul>
+      <li>The current dataset is locally curated and partly synthetic.</li>
+      <li>The evaluation is based on the dataset available in the repository only.</li>
+      <li>No live blacklist, WHOIS, DNS, or webpage HTML features are used.</li>
+    </ul>
+
+    <h3>7.2 Future Scope</h3>
+    <ul>
+      <li>Use larger real-world phishing datasets.</li>
+      <li>Add domain age, WHOIS, and DNS-based features.</li>
+      <li>Add live browser extension or email plugin integration.</li>
+      <li>Include explainable AI visualizations for feature contributions.</li>
+      <li>Extend QR analysis to detect multiple QR codes in one image.</li>
+    </ul>
+
+    <h2>References</h2>
+    <ol>
+      <li>Emre Kocyigit, Mehmet Korkmaz, Ozgur Koray Sahingoz, and Banu Diri, "Enhanced Feature Selection Using Genetic Algorithm for Machine-Learning-Based Phishing URL Detection," <em>Applied Sciences</em>, 2024. <br><a href="https://www.mdpi.com/2867520">https://www.mdpi.com/2867520</a></li>
+      <li>"Optimized URL Feature Selection Based on Genetic-Algorithm-Embedded Deep Learning for Phishing Website Detection," <em>Electronics</em>, MDPI, 2022. <br><a href="https://www.mdpi.com/2079-9292/11/7/1090">https://www.mdpi.com/2079-9292/11/7/1090</a></li>
+      <li>Sam-Shin Shin, Seung-Goo Ji, and Sung-Sam Hong, "A Heterogeneous Machine Learning Ensemble Framework for Malicious Webpage Detection," <em>Applied Sciences</em>, 2022. <br><a href="https://www.mdpi.com/2076-3417/12/23/12070">https://www.mdpi.com/2076-3417/12/23/12070</a></li>
+      <li>scikit-learn documentation, "RandomForestClassifier". <br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html</a></li>
+      <li>XGBoost documentation, "Python API Reference - XGBClassifier". <br><a href="https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier">https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier</a></li>
+      <li>LightGBM documentation, "lightgbm.LGBMClassifier". <br><a href="https://lightgbm.readthedocs.io/en/stable/pythonapi/lightgbm.LGBMClassifier.html">https://lightgbm.readthedocs.io/en/stable/pythonapi/lightgbm.LGBMClassifier.html</a></li>
+      <li>Flask documentation, "Quickstart". <br><a href="https://flask.palletsprojects.com/en/2.2.x/quickstart/">https://flask.palletsprojects.com/en/2.2.x/quickstart/</a></li>
+      <li>OpenCV documentation, "QRCodeDetector". <br><a href="https://docs.opencv.org/3.4/javadoc/org/opencv/objdetect/QRCodeDetector.html">https://docs.opencv.org/3.4/javadoc/org/opencv/objdetect/QRCodeDetector.html</a></li>
+    </ol>
+  </section>
+</body>
+</html>

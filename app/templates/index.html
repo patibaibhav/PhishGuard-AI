@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard AI — URL Safety Checker</title>
+    <meta name="description" content="AI-powered URL phishing detection using Machine Learning and Genetic Algorithm optimization. Check any URL for phishing threats instantly.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header" id="header">
+            <div class="logo-section">
+                <div class="shield-icon" id="shield-icon">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 4L6 12V22C6 33.1 13.64 43.34 24 46C34.36 43.34 42 33.1 42 22V12L24 4Z" 
+                              fill="url(#shield-gradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                        <path d="M20 26L24 30L32 20" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="shield-check"/>
+                        <defs>
+                            <linearGradient id="shield-gradient" x1="6" y1="4" x2="42" y2="46" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#6366F1"/>
+                                <stop offset="1" stop-color="#8B5CF6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>PhishGuard <span class="ai-badge">AI</span></h1>
+                    <p class="tagline">Intelligent URL Safety Analysis</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <div class="badge badge-ml">
+                    <span class="badge-dot"></span>
+                    ML Powered
+                </div>
+                <div class="badge badge-ga">
+                    <span class="badge-dot"></span>
+                    GA Optimized
+                </div>
+            </div>
+        </header>
+
+        <!-- Scanner Section -->
+        <section class="scanner-section" id="scanner-section">
+            <div class="scanner-card">
+                <div class="scanner-header">
+                    <h2>Scan a URL</h2>
+                    <p>Enter any URL to analyze it for phishing threats using our ML model</p>
+                </div>
+                <form class="scanner-form" id="scanner-form">
+                    <div class="input-wrapper" id="input-wrapper">
+                        <div class="input-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                            </svg>
+                        </div>
+                        <input 
+                            type="text" 
+                            id="url-input" 
+                            class="url-input" 
+                            placeholder="Enter URL to scan (e.g., https://example.com)" 
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+                        
+                        <!-- QR Code Upload Button -->
+                        <label for="qr-upload" class="qr-btn" title="Upload QR Code">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <rect x="7" y="7" width="3" height="3"/>
+                                <rect x="14" y="7" width="3" height="3"/>
+                                <rect x="7" y="14" width="3" height="3"/>
+                                <rect x="14" y="14" width="3" height="3"/>
+                            </svg>
+                        </label>
+                        <input type="file" id="qr-upload" accept="image/*" style="display: none;">
+
+                        <button type="submit" class="scan-btn" id="scan-btn">
+                            <span class="scan-btn-text">Analyze</span>
+                            <span class="scan-btn-loading">
+                                <svg class="spinner" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="31.4 31.4" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Quick Test URLs -->
+                <div class="quick-tests">
+                    <span class="quick-label">Quick test:</span>
+                    <button class="quick-btn safe" onclick="testURL('https://www.google.com')">google.com</button>
+                    <button class="quick-btn safe" onclick="testURL('https://www.amazon.com')">amazon.com</button>
+                    <button class="quick-btn danger" onclick="testURL('http://paypal-secure-login.tk/verify')">paypal-login.tk</button>
+                    <button class="quick-btn danger" onclick="testURL('http://192.168.1.1/banking/login')">IP phishing</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scanning Animation -->
+        <section class="scanning-overlay" id="scanning-overlay">
+            <div class="scanning-content">
+                <div class="scan-radar">
+                    <div class="radar-ring ring-1"></div>
+                    <div class="radar-ring ring-2"></div>
+                    <div class="radar-ring ring-3"></div>
+                    <div class="radar-sweep"></div>
+                    <div class="radar-center"></div>
+                </div>
+                <p class="scanning-text">Analyzing URL with ML model...</p>
+                <div class="scanning-steps" id="scanning-steps">
+                    <div class="scan-step" data-step="1">
+                        <span class="step-icon">⟳</span> Extracting URL features...
+                    </div>
+                    <div class="scan-step" data-step="2">
+                        <span class="step-icon">⟳</span> Running through GA-selected features...
+                    </div>
+                    <div class="scan-step" data-step="3">
+                        <span class="step-icon">⟳</span> Ensemble model prediction...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="results-section" style="display: none;">
+
+            <!-- Verdict Card -->
+            <div class="verdict-card" id="verdict-card">
+                <div class="verdict-icon" id="verdict-icon"></div>
+                <div class="verdict-info">
+                    <h2 class="verdict-label" id="verdict-label">—</h2>
+                    <p class="verdict-url" id="verdict-url">—</p>
+                </div>
+                <div class="confidence-ring" id="confidence-ring">
+                    <svg viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="52" class="ring-bg"/>
+                        <circle cx="60" cy="60" r="52" class="ring-fill" id="ring-fill"/>
+                    </svg>
+                    <div class="confidence-value">
+                        <span class="conf-number" id="conf-number">0</span>
+                        <span class="conf-percent">%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Meter -->
+            <div class="risk-meter-card" id="risk-meter-card">
+                <h3>Threat Level</h3>
+                <div class="risk-meter">
+                    <div class="risk-bar">
+                        <div class="risk-fill" id="risk-fill"></div>
+                        <div class="risk-indicator" id="risk-indicator"></div>
+                    </div>
+                    <div class="risk-labels">
+                        <span>Safe</span>
+                        <span>Low</span>
+                        <span>Medium</span>
+                        <span>High</span>
+                        <span>Dangerous</span>
+                    </div>
+                </div>
+                <p class="risk-level-text" id="risk-level-text">—</p>
+            </div>
+
+            <!-- Risk Factors -->
+            <div class="risk-factors-card" id="risk-factors-card" style="display: none;">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    Risk Factors Detected
+                </h3>
+                <ul class="risk-list" id="risk-list"></ul>
+            </div>
+
+            <!-- Feature Analysis -->
+            <div class="features-card" id="features-card">
+                <div class="features-header" onclick="toggleFeatures()">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                        Feature Analysis
+                        <span class="feature-count" id="feature-count">—</span>
+                    </h3>
+                    <svg class="chevron" id="features-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </div>
+                <div class="features-body" id="features-body">
+                    <div class="features-grid" id="features-grid"></div>
+                </div>
+            </div>
+
+            <!-- Probability Breakdown -->
+            <div class="probability-card">
+                <h3>Model Confidence</h3>
+                <div class="prob-bars">
+                    <div class="prob-item">
+                        <div class="prob-label">
+                            <span class="prob-dot safe"></span>
+                            Legitimate
+                        </div>
+                        <div class="prob-bar-wrapper">
+                            <div class="prob-bar safe" id="prob-bar-safe"></div>
+                        </div>
+                        <span class="prob-value" id="prob-value-safe">0%</span>
+                    </div>
+                    <div class="prob-item">
+                        <div class="prob-label">
+                            <span class="prob-dot danger"></span>
+                            Phishing
+                        </div>
+                        <div class="prob-bar-wrapper">
+                            <div class="prob-bar danger" id="prob-bar-phishing"></div>
+                        </div>
+                        <span class="prob-value" id="prob-value-phishing">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scan Another -->
+            <button class="scan-another-btn" id="scan-another-btn" onclick="resetScanner()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="1 4 1 10 7 10"/>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                </svg>
+                Scan Another URL
+            </button>
+        </section>
+
+        <!-- GA Optimization View -->
+        <section class="architecture-section">
+            <div class="arch-card">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle;">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    Genetic Algorithm Optimization
+                </h3>
+                <p>The system uses an evolutionary algorithm to find the optimal subset of URLs features, reducing 33 raw features down to the 15 most predictive traits. This eliminates noise and maximizes the Voting Ensemble's accuracy.</p>
+                
+                <div class="arch-images">
+                    <div class="img-wrapper">
+                        <img src="/plots/ga_evolution.png" alt="GA Fitness Over Generations">
+                        <span>Generation Optimization Curve</span>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="/plots/feature_importance.png" alt="Feature Importance">
+                        <span>Final Selected Features & Impact</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Info -->
+        <section class="tech-section">
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🧬</div>
+                    <h4>Genetic Algorithm</h4>
+                    <p>Feature selection via evolutionary optimization</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🌲</div>
+                    <h4>Random Forest</h4>
+                    <p>200 decision trees for robust prediction</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <h4>XGBoost</h4>
+                    <p>Gradient boosting for accuracy</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔬</div>
+                    <h4>33 URL Features</h4>
+                    <p>Lexical, structural & entropy analysis</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>PhishGuard AI — ML-Powered URL Phishing Detection</p>
+            <p class="footer-sub">Built with Random Forest + XGBoost + LightGBM | Optimized with Genetic Algorithm</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
